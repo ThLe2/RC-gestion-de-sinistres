@@ -8,7 +8,6 @@
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f4f0; color: #1a1a18; font-size: 14px; }
 .crm-wrap { display: flex; height: 100vh; }
- 
 .sidebar { width: 260px; min-width: 260px; border-right: 1px solid #e0dfd8; display: flex; flex-direction: column; background: #faf9f6; }
 .sidebar-logo { padding: 12px 14px 8px; border-bottom: 1px solid #e0dfd8; }
 .sidebar-logo img { height: 32px; width: auto; }
@@ -30,50 +29,35 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .badge-2 { background: #FAEEDA; color: #854F0B; }
 .badge-3 { background: #FAECE7; color: #993C1D; }
 .type-badge { font-size: 10px; padding: 2px 6px; border-radius: 10px; background: #f0eeea; color: #73726c; }
- 
 .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: #fff; }
 .main-header { padding: 14px 22px 12px; border-bottom: 1px solid #e8e7e0; display: flex; align-items: flex-start; justify-content: space-between; flex-shrink: 0; }
 .main-header-left h2 { font-size: 16px; font-weight: 500; color: #1a1a18; }
 .main-header-left p { font-size: 11px; color: #888780; margin-top: 2px; }
 .status-chip { font-size: 10px; padding: 3px 9px; border-radius: 20px; font-weight: 500; }
-.status-Nouveau { background: #dbeeff; color: #185FA5; }
-.status-En { background: #FAEEDA; color: #854F0B; }
-.status-Urgent { background: #FAECE7; color: #993C1D; }
-.status-Suivi { background: #EAF3DE; color: #3B6D11; }
-.status-Litige { background: #EEEDFE; color: #534AB7; }
-.status-Complexe { background: #f0eeea; color: #444; }
- 
-.tabs { display: flex; gap: 0; border-bottom: 1px solid #e8e7e0; flex-shrink: 0; background: #faf9f6; }
+.tabs { display: flex; border-bottom: 1px solid #e8e7e0; flex-shrink: 0; background: #faf9f6; }
 .tab { font-size: 12px; padding: 9px 18px; cursor: pointer; color: #888780; border-bottom: 2px solid transparent; transition: all .15s; }
 .tab:hover { color: #1a1a18; background: #f0eeea; }
 .tab.active { color: #185FA5; border-bottom-color: #378ADD; background: #fff; font-weight: 500; }
- 
 .tab-content { flex: 1; overflow-y: auto; padding: 18px 22px; }
- 
 .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin-bottom: 18px; }
 .info-card { background: #f5f4f0; border-radius: 7px; padding: 9px 13px; }
 .info-card .label { font-size: 10px; color: #888780; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 0.04em; }
 .info-card .value { font-size: 12px; font-weight: 500; color: #1a1a18; }
- 
 .section-title { font-size: 10px; font-weight: 600; color: #888780; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 9px; margin-top: 18px; }
 .section-title:first-child { margin-top: 0; }
- 
 .info-table { width: 100%; border-collapse: collapse; margin-bottom: 14px; }
 .info-table tr:nth-child(odd) { background: #f8f7f4; }
-.info-table td { padding: 6px 10px; font-size: 12px; border-bottom: 1px solid #eee; }
+.info-table td { padding: 7px 10px; font-size: 12px; border-bottom: 1px solid #eee; line-height: 1.45; }
 .info-table td:first-child { font-weight: 500; color: #73726c; width: 38%; font-size: 11px; }
- 
 .scenario-box { border-radius: 7px; padding: 13px 15px; margin-bottom: 13px; }
 .scenario-box.level-1 { background: #EAF3DE; border-left: 3px solid #639922; }
 .scenario-box.level-2 { background: #FAEEDA; border-left: 3px solid #BA7517; }
 .scenario-box.level-3 { background: #FAECE7; border-left: 3px solid #993C1D; }
 .scenario-box p { font-size: 12px; line-height: 1.6; color: #1a1a18; }
- 
 .consignes-box { background: #fff8e6; border-radius: 7px; padding: 12px 14px; margin-bottom: 10px; border: 1px solid #ffe099; }
 .consignes-box .warn { font-size: 10px; color: #854F0B; font-weight: 600; margin-bottom: 7px; text-transform: uppercase; letter-spacing: 0.04em; }
-.consigne-item { display: flex; gap: 8px; font-size: 12px; color: #1a1a18; margin-bottom: 5px; }
+.consigne-item { display: flex; gap: 8px; font-size: 12px; color: #1a1a18; margin-bottom: 5px; line-height: 1.5; }
 .consigne-num { font-weight: 600; color: #BA7517; min-width: 14px; }
- 
 .checklist { display: flex; flex-direction: column; gap: 3px; }
 .check-item { display: flex; align-items: center; gap: 9px; font-size: 12px; color: #1a1a18; cursor: pointer; padding: 6px 9px; border-radius: 5px; transition: background .12s; }
 .check-item:hover { background: #f5f4f0; }
@@ -81,21 +65,17 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 .check-box.checked { background: #378ADD; border-color: #378ADD; }
 .check-box.checked::after { content: ''; display: block; width: 8px; height: 5px; border-left: 2px solid white; border-bottom: 2px solid white; transform: rotate(-45deg) translate(0px,-1px); }
 .check-label.done { text-decoration: line-through; color: #aaa; }
- 
 .progress-wrap { margin-bottom: 12px; }
 .progress-label { display: flex; justify-content: space-between; font-size: 10px; color: #888780; margin-bottom: 4px; }
 .progress-bar { height: 4px; background: #e8e7e0; border-radius: 3px; overflow: hidden; }
 .progress-fill { height: 100%; background: #378ADD; border-radius: 3px; transition: width .3s; }
- 
 .btn { font-size: 11px; padding: 5px 12px; border-radius: 5px; border: 1px solid #d3d1c7; background: #fff; color: #1a1a18; cursor: pointer; transition: all .15s; }
 .btn:hover { background: #f5f4f0; }
 .btn-reset { color: #E24B4A; border-color: #F09595; }
 .btn-reset:hover { background: #FCEBEB; }
- 
 .empty-state { text-align: center; padding: 70px 20px; color: #888780; }
 .empty-icon { font-size: 36px; margin-bottom: 12px; }
 .empty-state p { font-size: 13px; line-height: 1.6; }
- 
 .footer-bar { background: #faf9f6; border-top: 1px solid #e8e7e0; padding: 6px 22px; font-size: 9px; color: #aaa; text-align: center; flex-shrink: 0; }
 </style>
 </head>
@@ -118,7 +98,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     <div class="case-list" id="case-list"></div>
     <div class="footer-bar">TMK Performances — Simulation CRC Sinistres</div>
   </div>
- 
   <div class="main">
     <div class="main-header" id="main-header">
       <div class="main-header-left">
@@ -139,225 +118,37 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     </div>
   </div>
 </div>
- 
 <script>
-const cases = [{
-  id:1, type:'auto', level:1,
-  title:'Dupont — Accrochage parking',
-  ref:'SIN-AUTO-2024-0341',
-  assure:'Marc Dupont',
-  tel:'06 12 34 56 78',
-  contrat:'Auto tous risques — Renault Clio',
-  date:'18/04/2024',
-  statut:'Nouveau',
-  difficulte:'Fondamental',
-  client_profil:"Vous êtes Marc Dupont, 42 ans, employé de bureau. C'est votre premier sinistre automobile. Vous avez eu un accrochage sur le parking du Carrefour. Le tiers a laissé un papier sur votre pare-brise. Vous êtes calme mais un peu désorienté.",
-  client_infos:[('Votre nom', 'Marc Dupont'), ('Votre contrat', 'Auto tous risques — Renault Clio 2020'), ("Ce qui s'est passé", "Accrochage parking — bosse sur l'aile arrière gauche"), ('Coordonnées du tiers', 'Paul Bernard — 06 98 11 22 33 — Assurance GMF'), ('Plaque du tiers', 'AB-123-CD'), ('Témoins', 'Aucun'), ('Photos', 'Oui, prises avec votre smartphone'), ('Constat amiable', 'Rempli et signé')],
-  client_consignes:['Soyez poli et coopératif, vous cherchez à déclarer votre sinistre', 'Ne donnez les infos que si on vous les demande', "Si le conseiller n'aborde pas le constat, attendez 2 min puis demandez : 'Qu'est-ce que je fais avec le constat amiable ?'", "À la fin, demandez : 'Combien de temps ça va prendre ?'"],
-  timeline:[],
-  checklist:['Vérifier identité et N° contrat', 'Recueillir coordonnées tiers complètes', 'Constat amiable rempli et signé ?', 'Photos prises ?', 'Témoins ?', 'Informer sur le mandatement expert (5-10 j)', 'Confirmer N° dossier par SMS', 'Valider la compréhension avant raccrochage']
-},
-{
-  id:2, type:'habitation', level:1,
-  title:'Martin — Dégât des eaux',
-  ref:'SIN-HAB-2024-0892',
-  assure:'Sophie Martin',
-  tel:'06 98 76 54 32',
-  contrat:'MRH — appartement 75012 Paris',
-  date:'17/04/2024',
-  statut:'En cours',
-  difficulte:'Fondamental',
-  client_profil:"Vous êtes Sophie Martin, 35 ans, locataire. Ce samedi matin, vous avez découvert une flaque d'eau dans votre cuisine — ça vient du plafond. Votre parquet commence à se gondoler. Vous êtes stressée et ne savez pas quoi faire en premier.",
-  client_infos:[('Votre nom', 'Sophie Martin'), ('Contrat', 'MRH — appartement 75012 Paris'), ('Situation', 'Fuite plafond cuisine, parquet gondolé'), ('Origine', 'Appartement du dessus (M. Renard, 3ème étage)'), ("Coupure d'eau", 'Pas encore faite (vous ne trouvez pas la vanne)'), ('Voisin prévenu', 'Non'), ('Photos', 'Pas encore prises')],
-  client_consignes:["Exprimez clairement votre stress dès le début de l'appel", "Posez la question : 'Est-ce que je dois prévenir mon voisin ou c'est votre rôle ?'", "Si le conseiller ne parle pas de la coupure d'eau dans les 2 premières minutes, demandez : 'Est-ce que je dois couper l'eau ?'", 'Demandez si vous devez appeler vous-même un plombier'],
-  timeline:[],
-  checklist:["Priorité 1 : coupure d'eau effectuée ?", 'Mandater plombier agréé immédiatement', 'Conseiller de prévenir le voisin', 'Conseiller de prévenir le syndic (par écrit)', 'Demander de prendre des photos', 'Expliquer le rôle du plombier agréé', "Informer du délai d'expertise (5 j)", 'Vérifier si relogement nécessaire']
-},
-{
-  id:3, type:'habitation', level:1,
-  title:'Renaud — Vol d’objets (locataire)',
-  ref:'SIN-HAB-2024-0310',
-  assure:'Claire Renaud',
-  tel:'06 33 44 55 11',
-  contrat:'MRH — appartement 31000 Toulouse',
-  date:'20/04/2024',
-  statut:'Nouveau',
-  difficulte:'Fondamental',
-  client_profil:"Vous êtes Claire Renaud, 28 ans, étudiante en master. Vous rentrez chez vous et constatez que votre appartement a été cambriolé : la fenêtre est forcée, votre ordinateur portable et votre console de jeu ont disparu. C'est la première fois que ça vous arrive. Vous êtes chokée mais vous contrôlez bien vos émotions.",
-  client_infos:[('Votre nom', 'Claire Renaud'), ('Contrat', 'MRH locataire — Toulouse'), ('Situation', 'Cambriolage découvert il y a 30 min'), ('Objets volés', 'MacBook Pro 2022, Nintendo Switch, écouteurs Sony'), ('Dépôt de plainte', 'Pas encore effectué'), ('Justificatifs', 'Factures MacBook et Switch disponibles par email'), ('Entrée par effraction', 'Fenêtre forcée — visible')],
-  client_consignes:["Vous êtes calme mais un peu tremblante à l'écoute", "Demandez : 'Est-ce que je dois appeler la police maintenant ou après ?'", "Si on ne vous parle pas des justificatifs, demandez : 'J'ai les factures de mon ordi, ça m'aide ?'", "À la fin demandez : 'Est-ce que mes affaires vont être remboursées intégralement ?'"],
-  timeline:[],
-  checklist:['Ne pas toucher à la scène avant passage de la police', 'Expliquer ordre des démarches (plainte → déclaration)', 'Recueillir la liste provisoire des biens volés', 'Vérifier les justificatifs disponibles', "Expliquer le délai de 5 jours pour l'inventaire", 'Informer sur la couverture valeur à neuf / vétusté', 'Confirmer N° dossier par SMS', 'Demander de rappeler dès le récépissé de plainte obtenu']
-},
-{
-  id:4, type:'auto', level:1,
-  title:'Leroy — Bris de glace',
-  ref:'SIN-AUTO-2024-0188',
-  assure:'Thomas Leroy',
-  tel:'06 71 82 93 04',
-  contrat:'Auto tous risques — Citroën C3',
-  date:'21/04/2024',
-  statut:'Nouveau',
-  difficulte:'Fondamental',
-  client_profil:"Vous êtes Thomas Leroy, 30 ans, ingénieur. En rentrant de vacances, vous constatez que le pare-brise de votre voiture (garée dans la rue) a été fêtelé par une pierre ou un projectile. Il y a une grande fissure. La voiture est autrement intacte. Vous êtes serein, c'est une formalité pour vous.",
-  client_infos:[('Votre nom', 'Thomas Leroy'), ('Contrat', 'Auto tous risques — Citroën C3 2021'), ('Sinistre', 'Pare-brise fêtelé — grande fissure diagonale'), ('Circonstances', 'Découvert ce matin, véhicule garé rue de la Paix, Paris 2'), ('Tiers', 'Aucun tiers identifié'), ('Utilisation véhicule', 'Peut rouler mais dangereux'), ('Urgence', "Pas d'urgence, mais besoin de circuler")],
-  client_consignes:['Vous êtes détendu et efficace — vous voulez juste régler ça vite', "Demandez : 'Je peux aller chez n'importe quel vitrier ou il faut passer par vous ?'", 'Demandez si vous aurez un véhicule de remplacement pendant la réparation', "Si on vous parle de franchise, demandez : 'C'est quoi le montant ?'"],
-  timeline:[],
-  checklist:['Vérifier la garantie bris de glace au contrat', 'Orienter vers le réseau de vitriers agréés', "Expliquer qu'il ne doit pas rouler avec ce pare-brise", 'Vérifier le véhicule de remplacement', "Informer sur le délai d'intervention", 'Confirmer prise en charge sans avance de frais']
-},
-{
-  id:5, type:'auto', level:2,
-  title:'Benali — Vol de véhicule',
-  ref:'SIN-AUTO-2024-0455',
-  assure:'Karim Benali',
-  tel:'06 55 44 33 22',
-  contrat:'Auto tous risques — BMW Série 3',
-  date:'19/04/2024',
-  statut:'Urgent',
-  difficulte:'Intermédiaire',
-  client_profil:"Vous êtes Karim Benali, VRP, 38 ans. Ce matin, vous n'avez pas retrouvé votre BMW au parking souterrain. Vous avez un rendez-vous client à 11h à 80 km. Vous êtes très agité, vous parlez vite, vous interrompez le conseiller. Vous voulez une solution immédiate.",
-  client_infos:[('Votre nom', 'Karim Benali'), ('Contrat', 'Auto tous risques — BMW Série 3 2022'), ('Situation', 'Véhicule disparu parking souterrain Gare du Nord'), ('Dernière fois vu', 'Hier soir 19h30'), ('Clés', '2 jeux à la maison'), ('Dépôt de plainte', 'Pas encore fait'), ('Documents véhicule', 'Carte grise et carte verte dans la voiture')],
-  client_consignes:["Commencez l'appel en parlant très vite et fort : 'Mon véhicule a été volé, j'en ai besoin maintenant !'", 'Interrompez le conseiller au moins une fois', "Si on vous parle du dépôt de plainte : 'Mais ça va prendre du temps, vous ne pouvez pas faire autrement ?'", 'Mentionnez les documents dans la voiture seulement si on vous pose la question'],
-  timeline:[],
-  checklist:['Ne pas se laisser déstabiliser — rester posé', 'Vérifier si dépôt de plainte effectué', "Toutes les clés chez l'assuré ?", 'Informer délai indemnisation (30 j)', 'Activer demande véhicule remplacement (en attente)', 'Conseiller masécurité.gouv.fr', 'Vérifier carte grise / carte verte disponibles']
-},
-{
-  id:6, type:'habitation', level:2,
-  title:'Leclerc — Appel sortant expertise',
-  ref:'SIN-HAB-2024-0701',
-  assure:'Patricia Leclerc',
-  tel:'06 23 45 67 89',
-  contrat:'MRH — maison individuelle 69003',
-  date:'10/04/2024',
-  statut:'Suivi',
-  difficulte:'Intermédiaire',
-  client_profil:"Vous êtes Patricia Leclerc, 52 ans, propriétaire. Vous avez déclaré un dégât des eaux le 10 avril. L'expertise était prévue pour demain (18 avril), vous avez pris votre matinée. Vous êtes impatiente — des travaux sont bloqués dans l'attente de l'expert.",
-  client_infos:[('Votre nom', 'Patricia Leclerc'), ('Sinistre', 'Dégât des eaux salle de bains'), ('Expertise prévue', 'Demain 18 avril — vous avez posé une demi-journée'), ('Vos attentes', 'Régler vite pour relancer les travaux de rénovation'), ('État', 'Déçue si report, mais raisonnable si bien expliqué')],
-  client_consignes:["Quand le conseiller annonce le report, exprimez votre déception : 'Ah non, j'avais posé ma matinée !'", "Demandez : 'C'est quoi la prochaine date ?'", 'Demandez si vous serez remboursée de la pose de votre demi-journée (non, bien sûr)', "Si on vous propose une avance sur indemnisation, intéressez-vous à l'idée", "Finissez par : 'OK, mais que ça ne soit pas reporté encore une fois'"],
-  timeline:[],
-  checklist:["Vérifier disponibilité en début d'appel", 'Annoncer le report sans détour', 'Exprimer des regrets sincères', 'Proposer nouvelle date ferme', 'Vérifier si travaux urgents bloqués', 'Proposer avance sur indemnisation', 'Promettre email de confirmation']
-},
-{
-  id:7, type:'habitation', level:2,
-  title:'Girard — Cambriolage, inventaire',
-  ref:'SIN-HAB-2024-0755',
-  assure:'Nathalie Girard',
-  tel:'06 44 55 66 77',
-  contrat:'MRH + Valeurs déclarées — maison 44000 Nantes',
-  date:'16/04/2024',
-  statut:'En cours',
-  difficulte:'Intermédiaire',
-  client_profil:'Vous êtes Nathalie Girard, 48 ans. Votre maison a été cambriolée cette nuit. Vous êtes sous le choc. Vous avez du mal à vous souvenir de tout ce qui a disparu. La bague de fiançailles de votre mère fait partie des objets volés — vous devenez émotive quand vous en parlez.',
-  client_infos:[('Votre nom', 'Nathalie Girard'), ('Situation', 'Cambriolage découvert ce matin'), ('Dépôt de plainte', 'Fait ce matin à 8h — récépissé obtenu'), ('Objets volés', 'Bijoux (dont bague de la mère), MacBook, TV salon, 200€ cash'), ('Justificatifs bijoux', 'Aucune facture, pas de photos récentes'), ('État émotionnel', 'Chokée, émotive pour la bague')],
-  client_consignes:['Parlez lentement, vous semblez épuisée et chokée', 'Quand vous parlez de la bague de votre mère, marquez une pause — votre voix tremble', "Demandez : 'Je dois tout me rappeler maintenant ou j'ai du temps ?'", "Demandez si l'assurance peut couvrir la bague màlgré l'absence de justificatif"],
-  timeline:[],
-  checklist:['Accuser réception du récépissé', "Prendre en charge l'émotion avant la logistique", "Expliquer le délai de 5 jours pour l'inventaire", "Commencer par ce dont l'assuré se souvient bien", 'Pour la bague : estimation bijoutier agréé', 'Expliquer les justificatifs alternatifs', 'Vérifier couverture du cash']
-},
-{
-  id:8, type:'auto', level:2,
-  title:'Faure — Accident responsable, franchise',
-  ref:'SIN-AUTO-2024-0622',
-  assure:'Julie Faure',
-  tel:'06 60 71 82 93',
-  contrat:'Auto tous risques — Peugeot 208',
-  date:'22/04/2024',
-  statut:'En cours',
-  difficulte:'Intermédiaire',
-  client_profil:'Vous êtes Julie Faure, 26 ans, étudiante en alternance. Vous avez eu un accident responsable — vous êtes entrée dans un poteau en manoeuvrant. Les dégâts sont sur votre pare-chocs avant et votre capot. Vous êtes inquiète car vous avez peu de ressources et vous ne savez pas ce que vous allez devoir payer.',
-  client_infos:[('Votre nom', 'Julie Faure'), ('Contrat', 'Auto tous risques — Peugeot 208 2023'), ('Sinistre', 'Accident responsable — manoeuvre contre poteau'), ('Dégâts', 'Pare-chocs avant + capot enfoncé'), ('Tiers', 'Aucun tiers, pas de constat'), ('Blessés', 'Aucun'), ('Inquiétude', 'Vous ne savez pas combien vous allez payer')],
-  client_consignes:["Exprimez votre inquiétude financière dès le début : 'Est-ce que ça va me coûter cher ?'", "Si on vous parle de franchise, demandez : 'C'est quoi exactement ?'", "Demandez : 'Est-ce que mon assurance va augmenter après ça ?'", 'Demandez si vous devez déposer un constat même sans tiers'],
-  timeline:[],
-  checklist:['Ouvrir le dossier et recueillir les éléments', 'Expliquer la franchise (300€)', 'Expliquer le principe du CRM (sans alarmer)', 'Orienter vers le réseau de réparateurs agréés', "Mandater l'expertise", "Ne jamais donner un montant de réparation à l'avance"]
-},
-{
-  id:9, type:'auto', level:3,
-  title:'Moreau — Refus de garantie',
-  ref:'SIN-AUTO-2024-0512',
-  assure:'Jean-Pierre Moreau',
-  tel:'06 77 88 99 00',
-  contrat:'Auto tiers simple — Peugeot 308',
-  date:'15/04/2024',
-  statut:'Litige',
-  difficulte:'Difficile',
-  client_profil:"Vous êtes Jean-Pierre Moreau, 61 ans, retraité. Vous avez eu un accident responsable. L'assurance refuse de réparer votre voiture. Vous êtes client depuis 8 ans. Vous êtes convaincu qu'ils ont l'obligation de réparer votre véhicule. C'est votre 3ème appel.",
-  client_infos:[('Votre nom', 'Jean-Pierre Moreau'), ('Contrat', 'Auto tiers simple — souscrit en 2016'), ('Sinistre', 'Accident responsable — dégâts sur votre véhicule'), ('Refus', "L'assurance refuse de couvrir vos dégâts"), ('Votre position', "Vous estimez qu'après 8 ans de fidélité, ils doivent vous aider")],
-  client_consignes:["Commencez par : 'C'est une honte ! J'ai payé pendant 8 ans et vous ne faites rien !'", "Utilisez le mot 'escroquerie' ou 'tromperie' au moins une fois", "Menacez d'appeler un avocat et de changer d'assurance", "Si le conseiller cite un article du contrat : 'Et c'était écrit où ça ?'", "Si on vous parle du médiateur : 'C'est quoi exactement ?'", 'Vous pouvez vous adoucir si le conseiller reste calme et précis'],
-  timeline:[],
-  checklist:["Relire contrat et CGU avant l'appel", "Ne pas s'excuser pour la décision — expliquer", "Citer l'article du contrat (Art. 4.2)", 'Rester calme malgré la colère', 'Ne rien promettre hors contrat', 'Proposer le médiateur', 'Donner les coordonnées du médiateur', 'Ne jamais hausser le ton']
-},
-{
-  id:10, type:'habitation', level:3,
-  title:'Fontaine — Incendie, suivi long terme',
-  ref:'SIN-HAB-2024-0200',
-  assure:'Hélène Fontaine, 74 ans',
-  tel:'06 11 22 33 44',
-  contrat:'MRH — appartement 13001 Marseille',
-  date:'01/03/2024',
-  statut:'Suivi long terme',
-  difficulte:'Difficile',
-  client_profil:"Vous êtes Hélène Fontaine, 74 ans, retraitée, vivant seule. Un incendie a partiellement détruit votre appartement il y a 7 semaines. Vous êtes relogie à l'hôtel. C'est votre 7ème appel. Vous êtes fatigue moralement et vous avez besoin d'une voix rassurante autant que d'informations.",
-  client_infos:[('Votre nom', 'Hélène Fontaine'), ('Situation', "Relogie à l'hôtel depuis 7 semaines"), ('Travaux', 'Devaient commencer le 25/03 — entreprise défaillante'), ('Inquiétudes', "Quand vais-je rentrer ? L'hôtel va-t-il être prolongé ?"), ('État', 'Fatigue, solitaire, mais patiente')],
-  client_consignes:['Parlez doucement, vous semblez épuisée', "Dites : 'Je voulais juste avoir des nouvelles...'", "Demandez avec inquiétude : 'Est-ce que ma prise en charge à l'hôtel continue ?'", "Après l'annonce des travaux, dites : 'Je me sens un peu seule là-bas, vous savez...'", 'Si on vous propose un référent dédié, exprimez de la reconnaissance sincère'],
-  timeline:[],
-  checklist:["Relire l'historique des 6 contacts précédents", "Nommer la durée : '7 semaines, c'est long'", 'Annoncer nouveau prestataire + date', 'Confirmer prolongation hôtel', 'Donner date estimée retour', "Laisser de l'espace pour qu'elle s'exprime", 'Proposer un référent dédié', 'Envoyer email récapitulatif']
-},
-{
-  id:11, type:'habitation', level:3,
-  title:'Vasseur — Litige expertise sous-évaluée',
-  ref:'SIN-HAB-2024-0850',
-  assure:'Bernard Vasseur',
-  tel:'06 22 33 44 55',
-  contrat:'MRH — maison 59000 Lille',
-  date:'05/04/2024',
-  statut:'Litige',
-  difficulte:'Difficile',
-  client_profil:"Vous êtes Bernard Vasseur, 58 ans, artisan. Vous avez subi un dégât des eaux important (parquet intégral à remplacer, placo, peintures). L'expert a évalué les dégâts à 4.200€, mais vous avez eu des devis d'artisans à 7.800€. Vous êtes convaincu que l'expert sous-évalue délibérément.",
-  client_infos:[('Votre nom', 'Bernard Vasseur'), ('Sinistre', 'Dégât des eaux — dommages importants'), ('Evaluation expert', '4.200 €'), ('Vos devis', '7.800 € (deux artisans indépendants)'), ('Votre position', "L'expert est de maniqué à sa mission, voire complaisant avec l'assureur"), ('Ce que vous voulez', 'Une contre-expertise ou un remboursement réel')],
-  client_consignes:["Dites clairement : 'Vos experts sont complaisants avec vous, c'est scandaleux'", "Présentez vos devis comme preuve irréfutable : 'J'ai deux devis à 7.800€, comment l'expert arrive à 4.200€ ?'", "Demandez : 'Est-ce que je peux avoir un autre expert ?'", "Si on vous parle de contre-expertise amiable, demandez : 'C'est à mes frais ?'", "Si on vous parle de médiateur, demandez si c'est différent de la contre-expertise"],
-  timeline:[],
-  checklist:["Valider l'émotion sans valider la thèse", 'Expliquer la contre-expertise amiable', 'Préciser le coût (selon contrat)', 'Expliquer la procédure (délai 30 j)', "Proposer le médiateur en cas d'échec", "Ne jamais juger le travail de l'expert", 'Proposer un suivi écrit de la demande']
-},
-{
-  id:12, type:'auto', level:3,
-  title:'Nguyen — Tiers non assuré, accident',
-  ref:'SIN-AUTO-2024-0711',
-  assure:'Liên Nguyen',
-  tel:'06 88 99 00 11',
-  contrat:'Auto tiers simple — Renault Twingo',
-  date:'23/04/2024',
-  statut:'Complexe',
-  difficulte:'Difficile',
-  client_profil:"Vous êtes Liên Nguyen, 34 ans, aide soignante. Vous avez été victime d'un accident — le tiers qui vous a percuté n'est pas assuré. Votre véhicule est très endommagé. Vous n'êtes pas responsable, vous avez le constat. Vous n'avez pas de garantie tous risques. Vous ne comprenez pas pourquoi vous devriez 'payer pour une faute que vous n'avez pas faite'.",
-  client_infos:[('Votre nom', 'Liên Nguyen'), ('Contrat', 'Auto tiers simple — Renault Twingo 2019'), ('Sinistre', 'Accident non responsable — tiers non assuré'), ('Dégâts', 'Véhicule très endommagé — probablement irréparable'), ('Tiers', 'Constat rempli — tiers reconnu responsable, mais non assuré'), ('Blessés', 'Vous avez mal au cou — pas hospitalisée')],
-  client_consignes:["Dites : 'C'est injuste, je ne suis pas responsable et c'est moi qui vais devoir me débrouiller ?'", "Demandez : 'Est-ce que l'assurance du tiers va quand même payer ?'", "Si on vous parle du FGAO : 'C'est quoi ça ?'", 'Signalez la douleur au cou seulement si on vous pose la question sur les blessés', "Demandez : 'Je vais pouvoir avoir un véhicule de remplacement ?'"],
-  timeline:[],
-  checklist:["Valider l'injustice perçue avec empathie", 'Vérifier la garantie corporelle conducteur', 'Expliquer le FGAO (fonds, démarche, délai)', 'Accompagner la démarche FGAO', 'Signaler la douleur — orienter vers médecin + déclaration', 'Véhicule remplacement : pas de garantie → orienter FGAO', 'Ne jamais minimiser la situation']
-}];
+const cases = [{"id": 1, "type": "auto", "level": 1, "title": "Dupont — Accrochage parking", "ref": "SIN-AUTO-2024-0341", "assure": "Marc Dupont", "tel": "06 12 34 56 78", "contrat": "Auto tous risques — Renault Clio", "date": "18/04/2024", "statut": "Nouveau", "difficulte": "Fondamental", "client_profil": "Vous êtes Marc Dupont, 42 ans, employé de bureau. C'est votre premier sinistre automobile. Vous avez eu un accrochage sur le parking du Carrefour. Le tiers a laissé un papier sur votre pare-brise. Vous êtes calme mais un peu désorienté.", "client_infos": [["Votre nom", "Marc Dupont"], ["Votre contrat", "Auto tous risques — Renault Clio 2020"], ["Ce qui s'est passé", "Accrochage parking — bosse sur l'aile arrière gauche"], ["Coordonnées du tiers", "Paul Bernard — 06 98 11 22 33 — Assurance GMF"], ["Plaque du tiers", "AB-123-CD"], ["Témoins", "Aucun"], ["Photos", "Oui, prises avec votre smartphone"], ["Constat amiable", "Rempli et signé"]], "client_consignes": ["Soyez poli et coopératif, vous cherchez à déclarer votre sinistre", "Ne donnez les infos que si on vous les demande", "Si le conseiller n'aborde pas le constat, attendez 2 min puis demandez : 'Qu'est-ce que je fais avec le constat amiable ?'", "À la fin, demandez : 'Combien de temps ça va prendre ?'"], "checklist": ["Vérifier identité et N° contrat", "Recueillir coordonnées tiers complètes", "Constat amiable rempli et signé ?", "Photos prises ?", "Témoins ?", "Informer sur le mandatement expert (5-10 j)", "Confirmer N° dossier par SMS", "Valider la compréhension avant raccrochage"]}, {"id": 2, "type": "habitation", "level": 1, "title": "Martin — Dégât des eaux", "ref": "SIN-HAB-2024-0892", "assure": "Sophie Martin", "tel": "06 98 76 54 32", "contrat": "MRH — appartement 75012 Paris", "date": "17/04/2024", "statut": "En cours", "difficulte": "Fondamental", "client_profil": "Vous êtes Sophie Martin, 35 ans, locataire. Ce samedi matin, vous avez découvert une flaque d'eau dans votre cuisine — ça vient du plafond. Votre parquet commence à se gondoler. Vous êtes stressée et ne savez pas quoi faire en premier.", "client_infos": [["Votre nom", "Sophie Martin"], ["Contrat", "MRH — appartement 75012 Paris"], ["Situation", "Fuite plafond cuisine, parquet gondolé"], ["Origine", "Appartement du dessus (M. Renard, 3ème étage)"], ["Coupure d'eau", "Pas encore faite (vous ne trouvez pas la vanne)"], ["Voisin prévenu", "Non"], ["Photos", "Pas encore prises"]], "client_consignes": ["Exprimez clairement votre stress dès le début de l'appel", "Posez la question : 'Est-ce que je dois prévenir mon voisin ou c'est votre rôle ?'", "Si le conseiller ne parle pas de la coupure d'eau dans les 2 premières minutes, demandez : 'Est-ce que je dois couper l'eau ?'", "Demandez si vous devez appeler vous-même un plombier"], "checklist": ["Priorité 1 : coupure d'eau effectuée ?", "Mandater plombier agréé immédiatement", "Conseiller de prévenir le voisin", "Conseiller de prévenir le syndic (par écrit)", "Demander de prendre des photos", "Expliquer le rôle du plombier agréé", "Informer du délai d'expertise (5 j)", "Vérifier si relogement nécessaire"]}, {"id": 3, "type": "habitation", "level": 1, "title": "Renaud — Vol d'objets (locataire)", "ref": "SIN-HAB-2024-0310", "assure": "Claire Renaud", "tel": "06 33 44 55 11", "contrat": "MRH — appartement 31000 Toulouse", "date": "20/04/2024", "statut": "Nouveau", "difficulte": "Fondamental", "client_profil": "Vous êtes Claire Renaud, 28 ans, étudiante en master. Vous rentrez chez vous et constatez que votre appartement a été cambriolé : la fenêtre est forcée, votre ordinateur portable et votre console ont disparu. C'est la première fois. Vous êtes choquée mais vous contrôlez bien vos émotions.", "client_infos": [["Votre nom", "Claire Renaud"], ["Contrat", "MRH locataire — Toulouse"], ["Situation", "Cambriolage découvert il y a 30 min"], ["Objets volés", "MacBook Pro 2022, Nintendo Switch, écouteurs Sony"], ["Dépôt de plainte", "Pas encore effectué"], ["Justificatifs", "Factures MacBook et Switch disponibles par email"], ["Entrée par effraction", "Fenêtre forcée — visible"]], "client_consignes": ["Vous êtes calme mais un peu tremblante à l'écoute", "Demandez : 'Est-ce que je dois appeler la police maintenant ou après ?'", "Si on ne vous parle pas des justificatifs, demandez : 'J'ai les factures de mon ordi, ça m'aide ?'", "À la fin demandez : 'Est-ce que mes affaires vont être remboursées intégralement ?'"], "checklist": ["Ne pas toucher à la scène avant passage de la police", "Expliquer ordre des démarches (plainte → déclaration)", "Recueillir la liste provisoire des biens volés", "Vérifier les justificatifs disponibles", "Expliquer le délai de 5 jours pour l'inventaire", "Informer sur la couverture valeur à neuf / vétusté", "Confirmer N° dossier par SMS", "Demander de rappeler dès le récépissé obtenu"]}, {"id": 4, "type": "auto", "level": 1, "title": "Leroy — Bris de glace", "ref": "SIN-AUTO-2024-0188", "assure": "Thomas Leroy", "tel": "06 71 82 93 04", "contrat": "Auto tous risques — Citroën C3", "date": "21/04/2024", "statut": "Nouveau", "difficulte": "Fondamental", "client_profil": "Vous êtes Thomas Leroy, 30 ans, ingénieur. En rentrant de vacances, vous constatez que le pare-brise de votre voiture a été fêlé par une pierre. Il y a une grande fissure. La voiture est autrement intacte. Vous êtes serein, c'est une formalité pour vous.", "client_infos": [["Votre nom", "Thomas Leroy"], ["Contrat", "Auto tous risques — Citroën C3 2021"], ["Sinistre", "Pare-brise fêlé — grande fissure diagonale"], ["Circonstances", "Découvert ce matin, véhicule garé rue de la Paix, Paris 2"], ["Tiers", "Aucun tiers identifié"], ["Utilisation véhicule", "Peut rouler mais dangereux"], ["Urgence", "Pas d'urgence, mais besoin de circuler"]], "client_consignes": ["Vous êtes détendu et efficace — vous voulez juste régler ça vite", "Demandez : 'Je peux aller chez n'importe quel vitrier ou il faut passer par vous ?'", "Demandez si vous aurez un véhicule de remplacement pendant la réparation", "Si on vous parle de franchise, demandez : 'C'est quoi le montant ?'"], "checklist": ["Vérifier la garantie bris de glace au contrat", "Orienter vers le réseau de vitriers agréés", "Expliquer qu'il ne doit pas rouler avec ce pare-brise", "Vérifier le véhicule de remplacement", "Informer sur le délai d'intervention", "Confirmer prise en charge sans avance de frais"]}, {"id": 5, "type": "auto", "level": 2, "title": "Benali — Vol de véhicule", "ref": "SIN-AUTO-2024-0455", "assure": "Karim Benali", "tel": "06 55 44 33 22", "contrat": "Auto tous risques — BMW Série 3", "date": "19/04/2024", "statut": "Urgent", "difficulte": "Intermédiaire", "client_profil": "Vous êtes Karim Benali, VRP, 38 ans. Ce matin, vous n'avez pas retrouvé votre BMW au parking souterrain. Vous avez un rendez-vous client à 11h à 80 km. Vous êtes très agité, vous parlez vite, vous interrompez le conseiller. Vous voulez une solution immédiate.", "client_infos": [["Votre nom", "Karim Benali"], ["Contrat", "Auto tous risques — BMW Série 3 2022"], ["Situation", "Véhicule disparu parking souterrain Gare du Nord"], ["Dernière fois vu", "Hier soir 19h30"], ["Clés", "2 jeux à la maison"], ["Dépôt de plainte", "Pas encore fait"], ["Documents véhicule", "Carte grise et carte verte dans la voiture"]], "client_consignes": ["Commencez l'appel en parlant très vite et fort : 'Mon véhicule a été volé, j'en ai besoin maintenant !'", "Interrompez le conseiller au moins une fois", "Si on vous parle du dépôt de plainte : 'Mais ça va prendre du temps, vous ne pouvez pas faire autrement ?'", "Mentionnez les documents dans la voiture seulement si on vous pose la question"], "checklist": ["Ne pas se laisser déstabiliser — rester posé", "Vérifier si dépôt de plainte effectué", "Toutes les clés chez l'assuré ?", "Informer délai indemnisation (30 j)", "Activer demande véhicule remplacement (en attente)", "Conseiller masécurité.gouv.fr", "Vérifier carte grise / carte verte disponibles"]}, {"id": 6, "type": "habitation", "level": 2, "title": "Leclerc — Appel sortant expertise", "ref": "SIN-HAB-2024-0701", "assure": "Patricia Leclerc", "tel": "06 23 45 67 89", "contrat": "MRH — maison individuelle 69003", "date": "10/04/2024", "statut": "Suivi", "difficulte": "Intermédiaire", "client_profil": "Vous êtes Patricia Leclerc, 52 ans, propriétaire. Vous avez déclaré un dégât des eaux le 10 avril. L'expertise était prévue pour demain (18 avril), vous avez pris votre matinée. Vous êtes impatiente — des travaux sont bloqués dans l'attente de l'expert.", "client_infos": [["Votre nom", "Patricia Leclerc"], ["Sinistre", "Dégât des eaux salle de bains"], ["Expertise prévue", "Demain 18 avril — vous avez posé une demi-journée"], ["Vos attentes", "Régler vite pour relancer les travaux de rénovation"], ["État", "Déçue si report, mais raisonnable si bien expliqué"]], "client_consignes": ["Quand le conseiller annonce le report, exprimez votre déception : 'Ah non, j'avais posé ma matinée !'", "Demandez : 'C'est quoi la prochaine date ?'", "Demandez si vous serez remboursée de la pose de votre demi-journée (non, bien sûr)", "Si on vous propose une avance sur indemnisation, intéressez-vous à l'idée", "Finissez par : 'OK, mais que ça ne soit pas reporté encore une fois'"], "checklist": ["Vérifier disponibilité en début d'appel", "Annoncer le report sans détour", "Exprimer des regrets sincères", "Proposer nouvelle date ferme", "Vérifier si travaux urgents bloqués", "Proposer avance sur indemnisation", "Promettre email de confirmation"]}, {"id": 7, "type": "habitation", "level": 2, "title": "Girard — Cambriolage, inventaire", "ref": "SIN-HAB-2024-0755", "assure": "Nathalie Girard", "tel": "06 44 55 66 77", "contrat": "MRH + Valeurs déclarées — maison 44000 Nantes", "date": "16/04/2024", "statut": "En cours", "difficulte": "Intermédiaire", "client_profil": "Vous êtes Nathalie Girard, 48 ans. Votre maison a été cambriolée cette nuit. Vous êtes sous le choc. Vous avez du mal à vous souvenir de tout ce qui a disparu. La bague de fiançailles de votre mère fait partie des objets volés — vous devenez émotive quand vous en parlez.", "client_infos": [["Votre nom", "Nathalie Girard"], ["Situation", "Cambriolage découvert ce matin"], ["Dépôt de plainte", "Fait ce matin à 8h — récépissé obtenu"], ["Objets volés", "Bijoux (dont bague de la mère), MacBook, TV salon, 200€ cash"], ["Justificatifs bijoux", "Aucune facture, pas de photos récentes"], ["État émotionnel", "Choquée, émotive pour la bague"]], "client_consignes": ["Parlez lentement, vous semblez épuisée et choquée", "Quand vous parlez de la bague de votre mère, marquez une pause — votre voix tremble", "Demandez : 'Je dois tout me rappeler maintenant ou j'ai du temps ?'", "Demandez si l'assurance peut couvrir la bague malgré l'absence de justificatif"], "checklist": ["Accuser réception du récépissé", "Prendre en charge l'émotion avant la logistique", "Expliquer le délai de 5 jours pour l'inventaire", "Commencer par ce dont l'assuré se souvient bien", "Pour la bague : estimation bijoutier agréé", "Expliquer les justificatifs alternatifs", "Vérifier couverture du cash"]}, {"id": 8, "type": "auto", "level": 2, "title": "Faure — Accident responsable, franchise", "ref": "SIN-AUTO-2024-0622", "assure": "Julie Faure", "tel": "06 60 71 82 93", "contrat": "Auto tous risques — Peugeot 208", "date": "22/04/2024", "statut": "En cours", "difficulte": "Intermédiaire", "client_profil": "Vous êtes Julie Faure, 26 ans, étudiante en alternance. Vous avez eu un accident responsable — vous êtes entrée dans un poteau en manoeuvrant. Les dégâts sont sur votre pare-chocs avant et votre capot. Vous êtes inquiète car vous avez peu de ressources et ne savez pas ce que vous allez devoir payer.", "client_infos": [["Votre nom", "Julie Faure"], ["Contrat", "Auto tous risques — Peugeot 208 2023"], ["Sinistre", "Accident responsable — manoeuvre contre poteau"], ["Dégâts", "Pare-chocs avant + capot enfoncé"], ["Tiers", "Aucun tiers, pas de constat"], ["Blessés", "Aucun"], ["Inquiétude", "Vous ne savez pas combien vous allez payer"]], "client_consignes": ["Exprimez votre inquiétude financière dès le début : 'Est-ce que ça va me coûter cher ?'", "Si on vous parle de franchise, demandez : 'C'est quoi exactement ?'", "Demandez : 'Est-ce que mon assurance va augmenter après ça ?'", "Demandez si vous devez déposer un constat même sans tiers"], "checklist": ["Ouvrir le dossier et recueillir les éléments", "Expliquer la franchise (300€)", "Expliquer le principe du CRM (sans alarmer)", "Orienter vers le réseau de réparateurs agréés", "Mandater l'expertise", "Ne jamais donner un montant de réparation à l'avance"]}, {"id": 9, "type": "auto", "level": 3, "title": "Moreau — Refus de garantie", "ref": "SIN-AUTO-2024-0512", "assure": "Jean-Pierre Moreau", "tel": "06 77 88 99 00", "contrat": "Auto tiers simple — Peugeot 308", "date": "15/04/2024", "statut": "Litige", "difficulte": "Difficile", "client_profil": "Vous êtes Jean-Pierre Moreau, 61 ans, retraité. Vous avez eu un accident responsable. L'assurance refuse de réparer votre voiture. Vous êtes client depuis 8 ans. Vous êtes convaincu qu'ils ont l'obligation de réparer votre véhicule. C'est votre 3ème appel.", "client_infos": [["Votre nom", "Jean-Pierre Moreau"], ["Contrat", "Auto tiers simple — souscrit en 2016"], ["Sinistre", "Accident responsable — dégâts sur votre véhicule"], ["Refus", "L'assurance refuse de couvrir vos dégâts"], ["Votre position", "Vous estimez qu'après 8 ans de fidélité, ils doivent vous aider"]], "client_consignes": ["Commencez par : 'C'est une honte ! J'ai payé pendant 8 ans et vous ne faites rien !'", "Utilisez le mot 'escroquerie' ou 'tromperie' au moins une fois", "Menacez d'appeler un avocat et de changer d'assurance", "Si le conseiller cite un article du contrat : 'Et c'était écrit où ça ?'", "Si on vous parle du médiateur : 'C'est quoi exactement ?'", "Vous pouvez vous adoucir si le conseiller reste calme et précis"], "checklist": ["Relire contrat et CGU avant l'appel", "Ne pas s'excuser pour la décision — expliquer", "Citer l'article du contrat (Art. 4.2)", "Rester calme malgré la colère", "Ne rien promettre hors contrat", "Proposer le médiateur", "Donner les coordonnées du médiateur", "Ne jamais hausser le ton"]}, {"id": 10, "type": "habitation", "level": 3, "title": "Fontaine — Incendie, suivi long terme", "ref": "SIN-HAB-2024-0200", "assure": "Hélène Fontaine, 74 ans", "tel": "06 11 22 33 44", "contrat": "MRH — appartement 13001 Marseille", "date": "01/03/2024", "statut": "Suivi long terme", "difficulte": "Difficile", "client_profil": "Vous êtes Hélène Fontaine, 74 ans, retraitée, vivant seule. Un incendie a partiellement détruit votre appartement il y a 7 semaines. Vous êtes relogée à l'hôtel. C'est votre 7ème appel. Vous êtes fatiguée moralement et avez besoin d'une voix rassurante autant que d'informations.", "client_infos": [["Votre nom", "Hélène Fontaine"], ["Situation actuelle", "Relogée à l'hôtel depuis 7 semaines"], ["Travaux", "Devaient commencer le 25/03 — entreprise défaillante"], ["Ce que vous savez", "L'assurance cherche un nouveau prestataire"], ["Inquiétudes", "Quand vais-je rentrer ? L'hôtel va-t-il être prolongé ?"], ["État", "Fatiguée, solitaire, mais patiente"]], "client_consignes": ["Parlez doucement, vous semblez épuisée", "Dites : 'Je voulais juste avoir des nouvelles...'", "Demandez avec inquiétude : 'Est-ce que ma prise en charge à l'hôtel continue ?'", "Après l'annonce des travaux, dites : 'Je me sens un peu seule là-bas, vous savez...'", "Si on vous propose un référent dédié, exprimez de la reconnaissance sincère"], "checklist": ["Relire l'historique des 6 contacts précédents", "Nommer la durée : '7 semaines, c'est long'", "Annoncer nouveau prestataire + date", "Confirmer prolongation hôtel", "Donner date estimée retour", "Laisser de l'espace pour qu'elle s'exprime", "Proposer un référent dédié", "Envoyer email récapitulatif"]}, {"id": 11, "type": "habitation", "level": 3, "title": "Vasseur — Litige expertise sous-évaluée", "ref": "SIN-HAB-2024-0850", "assure": "Bernard Vasseur", "tel": "06 22 33 44 55", "contrat": "MRH — maison 59000 Lille", "date": "05/04/2024", "statut": "Litige", "difficulte": "Difficile", "client_profil": "Vous êtes Bernard Vasseur, 58 ans, artisan. Vous avez subi un dégât des eaux important (parquet intégral à remplacer, placo, peintures). L'expert a évalué les dégâts à 4 200€, mais vous avez des devis d'artisans à 7 800€. Vous êtes convaincu que l'expert sous-évalue délibérément.", "client_infos": [["Votre nom", "Bernard Vasseur"], ["Sinistre", "Dégât des eaux — dommages importants"], ["Évaluation expert", "4 200 €"], ["Vos devis", "7 800 € (deux artisans indépendants)"], ["Votre position", "L'expert a manqué à sa mission"], ["Ce que vous voulez", "Une contre-expertise ou un remboursement réel"]], "client_consignes": ["Dites clairement : 'Vos experts sont complaisants avec vous, c'est scandaleux'", "Présentez vos devis comme preuve irréfutable : 'J'ai deux devis à 7 800€, comment il arrive à 4 200€ ?'", "Demandez : 'Est-ce que je peux avoir un autre expert ?'", "Si on vous parle de contre-expertise amiable, demandez : 'C'est à mes frais ?'", "Si on vous parle de médiateur, demandez si c'est différent de la contre-expertise"], "checklist": ["Valider l'émotion sans valider la thèse", "Expliquer la contre-expertise amiable", "Préciser le coût (selon contrat)", "Expliquer la procédure (délai 30 j)", "Proposer le médiateur en cas d'échec", "Ne jamais juger le travail de l'expert", "Proposer un suivi écrit de la demande"]}, {"id": 12, "type": "auto", "level": 3, "title": "Nguyen — Tiers non assuré, accident", "ref": "SIN-AUTO-2024-0711", "assure": "Liên Nguyen", "tel": "06 88 99 00 11", "contrat": "Auto tiers simple — Renault Twingo", "date": "23/04/2024", "statut": "Complexe", "difficulte": "Difficile", "client_profil": "Vous êtes Liên Nguyen, 34 ans, aide-soignante. Vous avez été victime d'un accident — le tiers qui vous a percutée n'est pas assuré. Votre véhicule est très endommagé. Vous n'êtes pas responsable, vous avez le constat. Vous n'avez pas de garantie tous risques. Vous ne comprenez pas pourquoi vous devriez 'payer pour une faute que vous n'avez pas faite'.", "client_infos": [["Votre nom", "Liên Nguyen"], ["Contrat", "Auto tiers simple — Renault Twingo 2019"], ["Sinistre", "Accident non responsable — tiers non assuré"], ["Dégâts", "Véhicule très endommagé — probablement irréparable"], ["Tiers", "Constat rempli — tiers reconnu responsable, mais non assuré"], ["Blessés", "Vous avez mal au cou — pas hospitalisée"]], "client_consignes": ["Dites : 'C'est injuste, je ne suis pas responsable et c'est moi qui vais devoir me débrouiller ?'", "Demandez : 'Est-ce que l'assurance du tiers va quand même payer ?'", "Si on vous parle du FGAO : 'C'est quoi ça ?'", "Signalez la douleur au cou seulement si on vous pose la question sur les blessés", "Demandez : 'Je vais pouvoir avoir un véhicule de remplacement ?'"], "checklist": ["Valider l'injustice perçue avec empathie", "Vérifier la garantie corporelle conducteur", "Expliquer le FGAO (fonds, démarche, délai)", "Accompagner la démarche FGAO", "Signaler la douleur — orienter vers médecin + déclaration", "Véhicule remplacement : pas de garantie → orienter FGAO", "Ne jamais minimiser la situation"]}];
 let cur = null, curTab = 'dossier', filter = 'all';
-let checks = {}, prog = {};
- 
+let checks = {};
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
 function filterCases(f, btn) {
   filter = f;
   document.querySelectorAll('.flt-btn').forEach(b => b.classList.remove('active'));
   btn.classList.add('active');
   renderList();
 }
- 
+
 function renderList() {
   const list = document.getElementById('case-list');
   const filtered = filter === 'all' ? cases : cases.filter(c => String(c.level) === filter);
   list.innerHTML = filtered.map(c => `
     <div class="case-item ${cur && cur.id === c.id ? 'active' : ''}" onclick="selectCase(${c.id})">
-      <div class="case-item-title">${c.title}</div>
-      <div class="case-item-sub">${c.ref}</div>
+      <div class="case-item-title">${escHtml(c.title)}</div>
+      <div class="case-item-sub">${escHtml(c.ref)}</div>
       <div class="case-item-meta">
-        <span class="badge badge-${c.level}">${c.difficulte}</span>
+        <span class="badge badge-${c.level}">${escHtml(c.difficulte)}</span>
         <span class="type-badge">${c.type === 'auto' ? 'Auto' : 'Habitation'}</span>
       </div>
     </div>
   `).join('');
 }
- 
+
 function selectCase(id) {
   cur = cases.find(c => c.id === id);
   curTab = 'dossier';
@@ -368,7 +159,7 @@ function selectCase(id) {
   document.getElementById('tabs-bar').style.display = 'flex';
   document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', i===0));
 }
- 
+
 function renderHeader() {
   const c = cur;
   document.getElementById('case-title').textContent = c.title;
@@ -377,19 +168,28 @@ function renderHeader() {
   const old = hdr.querySelector('.status-chip');
   if (old) old.remove();
   const chip = document.createElement('span');
-  const sw = c.statut.split(' ')[0];
-  chip.className = 'status-chip status-' + sw;
+  const statusColors = {
+    'Nouveau':'background:#dbeeff;color:#185FA5',
+    'En cours':'background:#FAEEDA;color:#854F0B',
+    'Urgent':'background:#FAECE7;color:#993C1D',
+    'Suivi':'background:#EAF3DE;color:#3B6D11',
+    'Litige':'background:#EEEDFE;color:#534AB7',
+    'Suivi long terme':'background:#EAF3DE;color:#3B6D11',
+    'Complexe':'background:#f0eeea;color:#444'
+  };
+  chip.className = 'status-chip';
+  chip.style.cssText = statusColors[c.statut] || 'background:#f0eeea;color:#444';
   chip.textContent = c.statut;
   hdr.appendChild(chip);
 }
- 
+
 function switchTab(tab, el) {
   curTab = tab;
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
   renderMain();
 }
- 
+
 function renderMain() {
   if (!cur) return;
   const c = cur;
@@ -397,31 +197,31 @@ function renderMain() {
   if (curTab === 'dossier') {
     content.innerHTML = `
       <div class="info-grid">
-        <div class="info-card"><div class="label">Assuré</div><div class="value">${c.assure}</div></div>
-        <div class="info-card"><div class="label">Téléphone</div><div class="value">${c.tel}</div></div>
-        <div class="info-card"><div class="label">Contrat</div><div class="value">${c.contrat}</div></div>
-        <div class="info-card"><div class="label">Date sinistre</div><div class="value">${c.date}</div></div>
+        <div class="info-card"><div class="label">Assuré</div><div class="value">${escHtml(c.assure)}</div></div>
+        <div class="info-card"><div class="label">Téléphone</div><div class="value">${escHtml(c.tel)}</div></div>
+        <div class="info-card"><div class="label">Contrat</div><div class="value">${escHtml(c.contrat)}</div></div>
+        <div class="info-card"><div class="label">Date sinistre</div><div class="value">${escHtml(c.date)}</div></div>
       </div>
       <div class="section-title">Profil client</div>
       <div class="scenario-box level-${c.level}">
-        <p>${c.client_profil}</p>
+        <p>${escHtml(c.client_profil)}</p>
       </div>
       <div class="section-title">Informations en votre possession</div>
       <table class="info-table">
-        ${c.client_infos.map(([k,v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('')}
+        ${c.client_infos.map(([k,v]) => `<tr><td>${escHtml(k)}</td><td>${escHtml(v)}</td></tr>`).join('')}
       </table>
     `;
   } else if (curTab === 'scenario') {
     content.innerHTML = `
       <div class="section-title">Mise en situation</div>
       <div class="scenario-box level-${c.level}">
-        <p>${c.client_profil}</p>
+        <p>${escHtml(c.client_profil)}</p>
       </div>
       <div class="section-title">Vos consignes de jeu</div>
       <div class="consignes-box">
         <div class="warn">⚠ À lire seul(e) — ne pas lire au conseiller</div>
         ${c.client_consignes.map((item, i) => `
-          <div class="consigne-item"><span class="consigne-num">${i+1}.</span><span>${item}</span></div>
+          <div class="consigne-item"><span class="consigne-num">${i+1}.</span><span>${escHtml(item)}</span></div>
         `).join('')}
       </div>
     `;
@@ -439,7 +239,7 @@ function renderMain() {
         ${c.checklist.map((item,i) => `
           <div class="check-item" onclick="toggleCheck(${c.id},${i})">
             <div class="check-box ${ch[i]?'checked':''}"></div>
-            <span class="check-label ${ch[i]?'done':''}">${item}</span>
+            <span class="check-label ${ch[i]?'done':''}">${escHtml(item)}</span>
           </div>
         `).join('')}
       </div>
@@ -449,17 +249,17 @@ function renderMain() {
     `;
   }
 }
- 
+
 function toggleCheck(caseId, index) {
   checks[caseId][index] = !checks[caseId][index];
   renderMain();
 }
- 
+
 function resetChecks(caseId) {
   checks[caseId] = new Array(cases.find(c=>c.id===caseId).checklist.length).fill(false);
   renderMain();
 }
- 
+
 renderList();
 </script>
 </body>
