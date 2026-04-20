@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CRM Simulation — Gestion des Sinistres</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f4f0; color: #1a1a18; font-size: 14px; }
+.crm-wrap { display: flex; height: 100vh; }
+
+/* Sidebar */
+.sidebar { width: 260px; min-width: 260px; border-right: 1px solid #e0dfd8; display: flex; flex-direction: column; background: #faf9f6; }
+.sidebar-header { padding: 16px 16px 10px; border-bottom: 1px solid #e0dfd8; }
+.sidebar-header h1 { font-size: 13px; font-weight: 600; color: #888780; letter-spacing: 0.05em; text-transform: uppercase; }
+.sidebar-header p { font-size: 11px; color: #aaa; margin-top: 2px; }
+.sidebar-filter { display: flex; gap: 6px; padding: 10px 12px; border-bottom: 1px solid #e0dfd8; }
+.flt-btn { font-size: 11px; padding: 4px 10px; border-radius: 20px; border: 1px solid #d3d1c7; background: transparent; color: #73726c; cursor: pointer; transition: all .15s; }
+.flt-btn.active { background: #dbeeff; color: #185FA5; border-color: #b5d4f4; font-weight: 500; }
+.case-list { overflow-y: auto; flex: 1; }
+.case-item { padding: 11px 14px; border-bottom: 1px solid #e8e7e0; cursor: pointer; transition: background .12s; }
+.case-item:hover { background: #fff; }
+.case-item.active { background: #fff; border-left: 3px solid #378ADD; padding-left: 11px; }
+.case-item-title { font-size: 13px; font-weight: 500; color: #1a1a18; margin-bottom: 2px; }
+.case-item-sub { font-size: 11px; color: #888780; }
+.case-item-meta { display: flex; gap: 6px; margin-top: 5px; align-items: center; }
+.badge { display: inline-block; font-size: 10px; padding: 2px 7px; border-radius: 10px; font-weight: 500; }
+.badge-1 { background: #EAF3DE; color: #3B6D11; }
+.badge-2 { background: #FAEEDA; color: #854F0B; }
+.badge-3 { background: #FAECE7; color: #993C1D; }
+.badge-4 { background: #EEEDFE; color: #534AB7; }
+.type-badge { font-size: 10px; padding: 2px 7px; border-radius: 10px; background: #f0eeea; color: #73726c; }
+
+/* Main area */
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: #fff; }
+.main-header { padding: 16px 24px 14px; border-bottom: 1px solid #e8e7e0; display: flex; align-items: flex-start; justify-content: space-between; flex-shrink: 0; background: #fff; }
+.main-header-left h2 { font-size: 17px; font-weight: 500; color: #1a1a18; }
+.main-header-left p { font-size: 12px; color: #888780; margin-top: 3px; }
+.status-chip { font-size: 11px; padding: 4px 10px; border-radius: 20px; font-weight: 500; }
+.status-nouveau { background: #dbeeff; color: #185FA5; }
+.status-encours { background: #FAEEDA; color: #854F0B; }
+.status-suivi { background: #EAF3DE; color: #3B6D11; }
+.status-urgent { background: #FAECE7; color: #993C1D; }
+.status-litige { background: #EEEDFE; color: #534AB7; }
+.status-complexe { background: #f0eeea; color: #444; }
+
+.tabs { display: flex; gap: 0; border-bottom: 1px solid #e8e7e0; flex-shrink: 0; background: #faf9f6; }
+.tab { font-size: 13px; padding: 10px 20px; cursor: pointer; color: #888780; border-bottom: 2px solid transparent; transition: all .15s; }
+.tab:hover { color: #1a1a18; background: #f0eeea; }
+.tab.active { color: #185FA5; border-bottom-color: #378ADD; background: #fff; font-weight: 500; }
+
+.tab-content { flex: 1; overflow-y: auto; padding: 20px 24px; }
+
+/* Dossier tab */
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+.info-card { background: #f5f4f0; border-radius: 8px; padding: 10px 14px; }
+.info-card .label { font-size: 11px; color: #888780; margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.04em; }
+.info-card .value { font-size: 13px; font-weight: 500; color: #1a1a18; }
+
+.section-title { font-size: 11px; font-weight: 600; color: #888780; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 10px; margin-top: 20px; }
+.section-title:first-child { margin-top: 0; }
+
+.timeline { display: flex; flex-direction: column; gap: 8px; }
+.tl-item { display: flex; gap: 12px; align-items: flex-start; }
+.tl-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+.tl-dot-blue { background: #378ADD; }
+.tl-dot-green { background: #639922; }
+.tl-dot-amber { background: #BA7517; }
+.tl-dot-red { background: #E24B4A; }
+.tl-body { flex: 1; }
+.tl-text { font-size: 13px; color: #1a1a18; line-height: 1.4; }
+.tl-time { font-size: 11px; color: #888780; margin-top: 1px; }
+
+.progress-bar-wrap { margin-bottom: 14px; }
+.progress-bar-label { display: flex; justify-content: space-between; font-size: 11px; color: #888780; margin-bottom: 5px; }
+.progress-bar { height: 5px; background: #e8e7e0; border-radius: 3px; overflow: hidden; }
+.progress-bar-fill { height: 100%; background: #378ADD; border-radius: 3px; transition: width .3s ease; }
+
+.checklist { display: flex; flex-direction: column; gap: 4px; }
+.check-item { display: flex; align-items: center; gap: 10px; font-size: 13px; color: #1a1a18; cursor: pointer; padding: 7px 10px; border-radius: 6px; transition: background .12s; border: 1px solid transparent; }
+.check-item:hover { background: #f5f4f0; border-color: #e0dfd8; }
+.check-box { width: 17px; height: 17px; border-radius: 4px; border: 1.5px solid #b4b2a9; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all .15s; }
+.check-box.checked { background: #378ADD; border-color: #378ADD; }
+.check-box.checked::after { content: ''; display: block; width: 9px; height: 5px; border-left: 2px solid white; border-bottom: 2px solid white; transform: rotate(-45deg) translate(0px,-1px); }
+.check-label.done { text-decoration: line-through; color: #aaa; }
+
+/* Scenario tab */
+.scenario-box { border-radius: 8px; padding: 14px 16px; margin-bottom: 14px; }
+.scenario-box.level-1 { background: #EAF3DE; border-left: 4px solid #639922; }
+.scenario-box.level-2 { background: #FAEEDA; border-left: 4px solid #BA7517; }
+.scenario-box.level-3 { background: #FAECE7; border-left: 4px solid #993C1D; }
+.scenario-box.level-4 { background: #EEEDFE; border-left: 4px solid #534AB7; }
+.scenario-box p { font-size: 13px; line-height: 1.65; color: #1a1a18; }
+.scenario-box .obj { font-size: 12px; color: #555; margin-top: 10px; padding-top: 10px; border-top: 1px solid rgba(0,0,0,0.08); font-weight: 500; }
+.vigilance-box { background: #f5f4f0; border-radius: 8px; padding: 12px 14px; font-size: 13px; line-height: 1.6; color: #1a1a18; }
+
+/* Script tab */
+.script-block { background: #faf9f6; border-radius: 8px; padding: 12px 14px; margin-bottom: 8px; border: 1px solid #e8e7e0; }
+.script-block.conseiller { border-left: 3px solid #378ADD; }
+.script-block.client { border-left: 3px solid #BA7517; }
+.script-who { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 5px; }
+.script-who.conseiller { color: #185FA5; }
+.script-who.client { color: #854F0B; }
+.script-text { font-size: 13px; color: #1a1a18; line-height: 1.55; font-style: italic; }
+.script-note { font-size: 11px; color: #73726c; margin-top: 7px; padding-top: 7px; border-top: 1px solid #e8e7e0; }
+
+/* Evaluation tab */
+.eval-item { display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: #faf9f6; border-radius: 8px; margin-bottom: 6px; border: 1px solid #e8e7e0; }
+.eval-label { font-size: 13px; color: #1a1a18; flex: 1; }
+.stars { display: flex; gap: 4px; }
+.star { font-size: 18px; cursor: pointer; color: #d3d1c7; transition: color .1s; line-height: 1; user-select: none; }
+.star.lit { color: #EF9F27; }
+.star:hover { color: #EF9F27; opacity: 0.7; }
+.score-card { background: #f5f4f0; border-radius: 8px; padding: 14px 16px; margin-top: 16px; display: flex; justify-content: space-between; align-items: center; }
+.score-card .sc-label { font-size: 12px; color: #888780; }
+.score-card .sc-val { font-size: 22px; font-weight: 500; color: #1a1a18; }
+
+/* Empty state */
+.empty-state { text-align: center; padding: 80px 20px; color: #888780; }
+.empty-icon { font-size: 40px; margin-bottom: 14px; }
+.empty-state p { font-size: 14px; line-height: 1.6; }
+
+/* Action buttons */
+.btn { font-size: 12px; padding: 6px 14px; border-radius: 6px; border: 1px solid #d3d1c7; background: #fff; color: #1a1a18; cursor: pointer; transition: all .15s; }
+.btn:hover { background: #f5f4f0; }
+.btn-reset { color: #E24B4A; border-color: #F09595; }
+.btn-reset:hover { background: #FCEBEB; }
+
+@media (max-width: 700px) {
+  .sidebar { width: 100%; position: fixed; z-index: 10; height: 40vh; }
+  .main { margin-top: 40vh; }
+}
+</style>
+</head>
+<body>
+<div class="crm-wrap">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h1>CRM Formation</h1>
+      <p>Gestion des sinistres — Simulation</p>
+    </div>
+    <div class="sidebar-filter">
+      <button class="flt-btn active" onclick="filterCases('all',this)">Tous</button>
+      <button class="flt-btn" onclick="filterCases('auto',this)">Auto</button>
+      <button class="flt-btn" onclick="filterCases('habitation',this)">Habitation</button>
+    </div>
+    <div class="case-list" id="case-list"></div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+    <div class="main-header" id="main-header">
+      <div class="main-header-left">
+        <h2 id="case-title">Bienvenue dans le CRM de simulation</h2>
+        <p id="case-subtitle">Sélectionnez un dossier dans la liste pour commencer l'entraînement</p>
+      </div>
+    </div>
+    <div class="tabs" id="tabs-bar" style="display:none">
+      <div class="tab active" onclick="switchTab('dossier',this)">Dossier</div>
+      <div class="tab" onclick="switchTab('scenario',this)">Scénario</div>
+      <div class="tab" onclick="switchTab('script',this)">Guide d'appel</div>
+      <div class="tab" onclick="switchTab('evaluation',this)">Évaluation</div>
+    </div>
+    <div class="tab-content" id="tab-content">
+      <div class="empty-state">
+        <div class="empty-icon">📂</div>
+        <p>Sélectionnez un dossier sinistre dans la liste<br>pour commencer la simulation d'appel.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const cases = [
+  {
+    id:1, type:'auto', level:1,
+    title:'Dupont — Accrochage parking',
+    ref:'SIN-AUTO-2024-0341',
+    assure:'Marc Dupont', tel:'06 12 34 56 78',
+    contrat:'Auto tous risques — Renault Clio', date:'18/04/2024', statut:'Nouveau',
+    context:"M. Dupont vous appelle après un accrochage sur un parking de supermarché. Le tiers a laissé ses coordonnées. Pas de blessé. M. Dupont est calme mais un peu désorienté, c'est son premier sinistre.",
+    objectif:"Maîtriser la collecte d'informations et l'ouverture de dossier.",
+    difficulte:'Fondamental',
+    vigilance:"Cas d'entrée en matière. L'assuré est coopératif. Concentrez-vous sur la méthode : collecter les informations dans le bon ordre, expliquer les prochaines étapes clairement, et conclure l'appel en validant la compréhension.",
+    timeline:[
+      {dot:'blue',time:"Aujourd'hui 10h14",text:'Appel entrant — déclaration de sinistre'}
+    ],
+    checklist:["Recueillir les coordonnées du tiers","Numéro de plaque du tiers","Constat amiable rempli ?","Présence de témoins ?","Photos des dégâts prises ?","Expliquer les prochaines étapes (expertise)","Confirmer le N° dossier par SMS"],
+    script:[
+      {who:'conseiller',text:"« Bonjour, vous êtes bien en contact avec [Compagnie], je suis [Prénom], comment puis-je vous aider ? »",note:'Sourire dans la voix, débit posé.'},
+      {who:'client',text:"« Oui bonjour, j'ai eu un accrochage sur le parking de Carrefour, l'autre conducteur a laissé un papier mais je ne sais pas quoi faire exactement... »",note:''},
+      {who:'conseiller',text:"« Je comprends, ne vous inquiétez pas, je vais vous guider pas à pas. Pouvez-vous me confirmer votre nom et numéro de contrat ? »",note:"Rassurer immédiatement. Prendre le contrôle calmement."},
+      {who:'conseiller',text:"« Très bien. Avez-vous les coordonnées du tiers — nom, numéro de plaque et compagnie d'assurance si possible ? »",note:"Collecter méthodiquement. Rester patient si l'assuré cherche ses papiers."},
+      {who:'conseiller',text:"« Parfait. Je vais ouvrir votre dossier. Un expert va être mandaté sous 5 à 10 jours ouvrés. Vous recevrez un SMS avec votre numéro de dossier. Des questions ? »",note:"Reformuler, valider la compréhension avant de raccrocher."}
+    ],
+    eval:["Accueil et mise en confiance","Collecte des informations","Clarté des explications","Gestion du rythme","Clôture de l'appel"]
+  },
+  {
+    id:2, type:'habitation', level:1,
+    title:'Martin — Dégât des eaux',
+    ref:'SIN-HAB-2024-0892',
+    assure:'Sophie Martin', tel:'06 98 76 54 32',
+    contrat:'MRH — appartement 75012 Paris', date:'17/04/2024', statut:'En cours',
+    context:"Mme Martin appelle un samedi matin. Une fuite d'eau est apparue dans sa cuisine, venant de l'appartement du dessus. Son parquet commence à se gondoler. Elle est stressée et ne sait pas si elle doit prévenir le voisin ou attendre.",
+    objectif:"Expliquer les démarches d'urgence, les délais, les intervenants (plombier agréé, expert).",
+    difficulte:'Fondamental',
+    vigilance:"Complexité émotionnelle modérée. Donner des actions concrètes et séquencées réduit l'anxiété. Priorité : sécurité (coupure d'eau) avant les aspects administratifs.",
+    timeline:[
+      {dot:'blue',time:'17/04 09h22',text:'Appel entrant — signalement fuite'},
+      {dot:'amber',time:'17/04 09h35',text:'Envoi plombier urgence mandaté'}
+    ],
+    checklist:["Localiser précisément la fuite (origine)","Voisin du dessus prévenu ?","Coupure d'eau effectuée ?","Dommages visibles documentés (photos)","Déclaration au syndic nécessaire ?","Rôle du plombier agréé expliqué","Délai d'expertise communiqué","Prise en charge hôtelière vérifiée si nécessaire"],
+    script:[
+      {who:'client',text:"« Bonjour, j'ai une fuite d'eau chez moi, ça vient du plafond, je ne sais pas quoi faire, le parquet est trempé... »",note:''},
+      {who:'conseiller',text:"« Bonjour Madame Martin, je comprends, c'est une situation stressante. La première chose importante : avez-vous pu couper l'arrivée d'eau dans votre appartement ? »",note:"Priorité sécurité avant tout. Voix calme et rassurante."},
+      {who:'conseiller',text:"« Bien. Je mandate immédiatement un plombier agréé qui interviendra sous 2 à 4 heures. En attendant, prenez des photos de tous les dégâts visibles. »",note:"Donner des actions concrètes réduit l'anxiété."},
+      {who:'conseiller',text:"« Il faut aussi prévenir votre voisin du dessus et votre syndic par lettre ou mail — cela protège vos droits dans la procédure. »",note:''}
+    ],
+    eval:["Gestion de l'urgence émotionnelle","Séquençage des actions","Explication des intervenants","Ton rassurant","Information sur les délais"]
+  },
+  {
+    id:3, type:'auto', level:2,
+    title:'Benali — Vol de véhicule',
+    ref:'SIN-AUTO-2024-0455',
+    assure:'Karim Benali', tel:'06 55 44 33 22',
+    contrat:'Auto tous risques — BMW Série 3', date:'19/04/2024', statut:'Urgent',
+    context:"M. Benali appelle de la rue, très agité. Son véhicule a disparu du parking souterrain. Il utilise sa voiture pour son travail (VRP) et doit avoir un véhicule de remplacement aujourd'hui. Il parle vite, vous coupe la parole.",
+    objectif:"Gérer l'urgence émotionnelle tout en collectant les éléments obligatoires.",
+    difficulte:'Intermédiaire',
+    vigilance:"Ne pas se laisser déstabiliser par l'agitation. Donner une action concrète et rapide rassure. Ne jamais promettre un véhicule sans vérifier la garantie d'abord.",
+    timeline:[
+      {dot:'red',time:'19/04 08h07',text:'Appel entrant — vol déclaré'},
+      {dot:'amber',time:'19/04 08h07',text:"Dépôt de plainte non encore effectué"}
+    ],
+    checklist:["Dépôt de plainte obligatoire (sous 24h)","Localisation du véhicule (dernière fois vu)","Toutes les clés en possession de l'assuré ?","Vérification garantie vol au contrat","Véhicule de remplacement : garantie activable ?","Délai indemnisation communiqué (30 j après plainte)","Carte grise et carte verte disponibles ?"],
+    script:[
+      {who:'client',text:"« Mon véhicule a été volé ! J'en ai besoin aujourd'hui, c'est mon outil de travail, vous devez me trouver une solution ! »",note:''},
+      {who:'conseiller',text:"« Je vous entends, M. Benali, et je vais faire le maximum pour vous aider rapidement. Pour agir vite, j'ai besoin que vous me confirmiez deux choses essentielles... »",note:"Ne pas se laisser déstabiliser. Reformuler en prenant le contrôle doucement."},
+      {who:'conseiller',text:"« La priorité absolue est le dépôt de plainte — sans ça, je ne peux pas activer votre garantie vol. Vous pouvez le faire en ligne sur masécurité.gouv.fr en 10 minutes. »",note:"Donner une action concrète et rapide rassure."},
+      {who:'conseiller',text:"« Dès que vous avez le récépissé de plainte, rappelez-nous. Je prépare votre dossier pendant ce temps et j'active la demande de véhicule de remplacement en attente. »",note:"Montrer que vous agissez en parallèle crée de la confiance."}
+    ],
+    eval:["Gestion de l'agitation du client","Maintien de la maîtrise","Explication des obligations légales","Proposition concrète","Empathie sans sur-promesse"]
+  },
+  {
+    id:4, type:'habitation', level:2,
+    title:'Leclerc — Appel sortant expertise',
+    ref:'SIN-HAB-2024-0701',
+    assure:'Patricia Leclerc', tel:'06 23 45 67 89',
+    contrat:'MRH — maison individuelle 69003', date:'10/04/2024', statut:'Suivi',
+    context:"Mme Leclerc a déclaré un sinistre dégât des eaux le 10/04. L'expertise était prévue le 18/04 mais l'expert est indisponible. Vous devez l'appeler pour lui annoncer le report au 25/04. Elle avait signalé son impatience lors du premier appel (travaux urgents).",
+    objectif:"Annoncer une mauvaise nouvelle avec tact, proposer une alternative.",
+    difficulte:'Intermédiaire',
+    vigilance:"Appel sortant : toujours vérifier la disponibilité en début d'appel. Aller droit au but pour l'annonce — l'hésitation aggrave la perception négative.",
+    timeline:[
+      {dot:'blue',time:'10/04',text:"Déclaration sinistre — dégât des eaux"},
+      {dot:'green',time:'12/04',text:'Ouverture dossier — expert mandaté'},
+      {dot:'amber',time:"Aujourd'hui",text:"Report expertise — appel sortant à effectuer"}
+    ],
+    checklist:["Préparer le dossier avant d'appeler","Annoncer le report clairement et sans détour","Exprimer des regrets sincères","Proposer nouvelle date ferme (25/04)","Vérifier si des travaux urgents sont bloqués","Proposer une avance sur indemnisation si possible","Confirmer par écrit (email)"],
+    script:[
+      {who:'conseiller',text:"« Bonjour Madame Leclerc, je suis [Prénom] de [Compagnie]. J'appelle concernant votre dossier sinistre. Avez-vous quelques minutes ? »",note:"Appel sortant : toujours vérifier la disponibilité."},
+      {who:'client',text:"« Oui, c'est bien moi. L'expertise c'est demain, je me suis organisée... »",note:''},
+      {who:'conseiller',text:"« Madame Leclerc, je vous appelle justement à ce sujet, et je m'en excuse sincèrement : notre expert ne peut malheureusement pas se rendre disponible demain. Je vous propose le 25 avril, est-ce que cette date vous convient ? »",note:"Aller droit au but. Ne pas tourner autour."},
+      {who:'conseiller',text:"« Je comprends votre frustration, et vous avez tout à fait raison. Si vous avez des travaux urgents qui ne peuvent pas attendre, je peux vérifier la possibilité d'une avance sur indemnisation. »",note:"Transformer la contrainte en solution proactive."}
+    ],
+    eval:["Préparation de l'appel sortant","Annonce directe et sans détour","Empathie et regrets sincères","Proposition d'alternative","Confirmation écrite proposée"]
+  },
+  {
+    id:5, type:'habitation', level:2,
+    title:'Girard — Cambriolage, inventaire',
+    ref:'SIN-HAB-2024-0755',
+    assure:'Nathalie Girard', tel:'06 44 55 66 77',
+    contrat:'MRH + Valeurs déclarées — maison 44000 Nantes', date:'16/04/2024', statut:'En cours',
+    context:"Mme Girard a été cambriolée. Des bijoux, de l'électronique et du cash ont été dérobés. Elle est sous le choc. Elle doit reconstituer la liste des biens volés mais a du mal à se souvenir. Elle devient émotive quand elle parle d'un bijou de famille.",
+    objectif:"Guider méthodiquement la reconstitution de l'inventaire sans brusquer l'assuré.",
+    difficulte:'Intermédiaire',
+    vigilance:"La prise en charge émotionnelle prime sur la logistique. Laisser de l'espace pour les silences. Ne jamais forcer le rythme sur un bien à forte charge affective.",
+    timeline:[
+      {dot:'red',time:'16/04 07h15',text:'Découverte du cambriolage'},
+      {dot:'blue',time:'16/04 08h00',text:'Appel entrant — déclaration'},
+      {dot:'green',time:'16/04 08h30',text:'Dépôt de plainte effectué'}
+    ],
+    checklist:["Récépissé de plainte obtenu ?","Inventaire des biens volés amorcé","Justificatifs disponibles (factures, photos) ?","Bijoux : estimation ou certificat d'authenticité ?","Franchises vérifiées au contrat","Délai pour compléter l'inventaire communiqué (5 jours)","Accompagnement psychologique proposé si nécessaire"],
+    script:[
+      {who:'client',text:"« Je n'arrive pas à me souvenir de tout ce qu'ils ont pris... et ma bague de fiançailles... ma mère me l'avait donnée... »",note:''},
+      {who:'conseiller',text:"« Je comprends, Madame Girard. Cette bague a une valeur bien au-delà du matériel, et je suis vraiment désolé. Prenons le temps qu'il faut. »",note:"Reconnaître la dimension émotionnelle avant de continuer."},
+      {who:'conseiller',text:"« Pour l'inventaire, vous avez 5 jours pour le compléter. Commençons ensemble par ce dont vous vous souvenez le mieux, et vous pourrez compléter chez vous. »",note:"Retirer la pression du temps réduit le stress."},
+      {who:'conseiller',text:"« Pour la bague, si vous avez une photo ou un certificat d'authenticité, cela facilitera l'évaluation. Sinon, un bijoutier peut faire une estimation. »",note:''}
+    ],
+    eval:["Empathie et gestion de l'émotion","Guidage méthodique sans pression","Information sur les délais","Traitement des biens à valeur affective","Proposition de ressources complémentaires"]
+  },
+  {
+    id:6, type:'auto', level:3,
+    title:'Moreau — Refus de garantie',
+    ref:'SIN-AUTO-2024-0512',
+    assure:'Jean-Pierre Moreau', tel:'06 77 88 99 00',
+    contrat:'Auto tiers simple — Peugeot 308', date:'15/04/2024', statut:'Litige',
+    context:"M. Moreau a eu un accident responsable. Son contrat est 'tiers simple', il n'a donc pas de garantie dommages propres. Il est convaincu que sa voiture doit être réparée par l'assurance. Il parle de 'tromperie' et menace d'appeler un avocat. C'est sa 3ème relance.",
+    objectif:"Expliquer clairement le motif de refus, maintenir la relation malgré le conflit.",
+    difficulte:'Difficile',
+    vigilance:"Ne pas s'excuser pour la décision — expliquer. Citer les articles du contrat avec précision. Proposer systématiquement le médiateur. Ne jamais hausser le ton ni céder sous la pression.",
+    timeline:[
+      {dot:'blue',time:'15/04',text:'Déclaration sinistre — accident responsable'},
+      {dot:'red',time:'16/04',text:'Premier rappel — contestation refus'},
+      {dot:'red',time:'17/04',text:"Deuxième rappel — menace de plainte"},
+      {dot:'red',time:"Aujourd'hui",text:'Troisième appel — escalade'}
+    ],
+    checklist:["Relire contrat et CGU entièrement avant l'appel","Identifier les garanties souscrites (tiers simple)","Ne pas s'excuser pour la décision — expliquer","Citer précisément les articles du contrat","Proposer recours médiateur de l'assurance","Ne pas promettre ce qui n'est pas possible","Transmettre les coordonnées du médiateur"],
+    script:[
+      {who:'client',text:"« C'est une honte ! J'ai payé mon assurance pendant 8 ans et vous ne faites rien ! C'est de l'escroquerie ! »",note:''},
+      {who:'conseiller',text:"« M. Moreau, je vous entends et je comprends que cette situation est très difficile. Permettez-moi de vous expliquer précisément la situation, parce que vous méritez une réponse claire. »",note:"Ne pas répondre à l'agression. Rester factuel et bienveillant."},
+      {who:'conseiller',text:"« Votre contrat souscrit en 2016 est une formule tiers simple, qui couvre les dommages causés à autrui, mais pas les dommages à votre propre véhicule en cas d'accident responsable. C'est précisément l'article 4.2 de vos conditions générales. »",note:"La précision rassure et crédibilise."},
+      {who:'conseiller',text:"« Si vous estimez que cette décision n'est pas fondée, vous avez le droit de saisir le médiateur de l'assurance, gratuit et indépendant. Je vous transmets ses coordonnées. »",note:"Toujours proposer le recours légal. Cela démontre votre bonne foi."}
+    ],
+    eval:["Gestion d'un client très en colère","Précision et maîtrise contractuelle","Neutralité émotionnelle","Explication du refus sans s'excuser","Proposition du recours médiateur"]
+  },
+  {
+    id:7, type:'habitation', level:3,
+    title:'Fontaine — Incendie, suivi long terme',
+    ref:'SIN-HAB-2024-0200',
+    assure:'Hélène Fontaine, 74 ans', tel:'06 11 22 33 44',
+    contrat:'MRH — appartement 13001 Marseille', date:'01/03/2024', statut:'Suivi long terme',
+    context:"Mme Fontaine, 74 ans, vit seule. Un incendie a partiellement détruit son appartement. Elle est relogée à l'hôtel depuis 7 semaines. Les travaux ont pris du retard (entreprise défaillante). Elle appelle régulièrement, parfois pour de la simple 'présence'.",
+    objectif:"Prise en charge émotionnelle sur la durée, coordination des intervenants, capacité à rebondir.",
+    difficulte:'Difficile',
+    vigilance:"La notion de 'client vulnérable' s'applique pleinement ici. La proposition d'un référent dédié est un levier puissant. Nommer la durée du parcours montre qu'on mesure l'impact réel.",
+    timeline:[
+      {dot:'red',time:'01/03',text:"Incendie déclaré — relogement d'urgence"},
+      {dot:'blue',time:'05/03',text:'Expertise terrain effectuée'},
+      {dot:'green',time:'12/03',text:'Accord indemnisation signé'},
+      {dot:'amber',time:'25/03',text:'Entreprise travaux mandatée'},
+      {dot:'red',time:'15/04',text:"Retard travaux — changement prestataire"},
+      {dot:'blue',time:"Aujourd'hui",text:'Appel entrant — 7ème contact'}
+    ],
+    checklist:["Relire l'historique des 6 contacts précédents","Reconnaître la durée du parcours","Mettre à jour sur les travaux (nouveau prestataire)","Évaluer l'état émotionnel de l'assuré","Proposer un référent dédié","Vérifier la prise en charge hôtelière (renouvellement)","Laisser de l'espace pour qu'elle s'exprime"],
+    script:[
+      {who:'client',text:"« Bonjour... c'est encore moi, Hélène Fontaine. Je voulais juste savoir si vous aviez des nouvelles pour les travaux... »",note:''},
+      {who:'conseiller',text:"« Bonjour Madame Fontaine, bien sûr. Je vois votre dossier... Cela fait maintenant sept semaines. C'est long, et je sais que ce n'est pas facile. »",note:"Nommer la durée montre qu'on mesure l'impact réel."},
+      {who:'conseiller',text:"« J'ai une bonne nouvelle : nous avons mandaté un nouveau prestataire qui commence les travaux le 29 avril. Le délai estimé est de 3 semaines. Votre hébergement hôtelier est prolongé en conséquence. »",note:"Donner une date précise. L'incertitude est la principale source d'anxiété."},
+      {who:'client',text:"« Ah... merci. Je me sens un peu seule là-bas, vous savez... »",note:''},
+      {who:'conseiller',text:"« Je comprends, Madame Fontaine. À partir d'aujourd'hui, je suis votre interlocuteur dédié — vous demandez [Prénom] directement. »",note:"Le référent dédié est un puissant levier de réassurance."}
+    ],
+    eval:["Empathie et reconnaissance de la durée","Maîtrise de l'historique dossier","Clarté sur les prochaines étapes","Prise en charge émotionnelle","Proposition du référent dédié"]
+  }
+];
+
+let currentCase = null;
+let currentTab = 'dossier';
+let filterType = 'all';
+let checkStates = {};
+let evalStates = {};
+
+const statusClass = {
+  'Nouveau':'status-nouveau','En cours':'status-encours','Urgent':'status-urgent',
+  'Suivi':'status-suivi','Litige':'status-litige','Suivi long terme':'status-suivi','Complexe':'status-complexe'
+};
+
+function filterCases(type, btn) {
+  filterType = type;
+  document.querySelectorAll('.flt-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderList();
+}
+
+function renderList() {
+  const list = document.getElementById('case-list');
+  const filtered = filterType === 'all' ? cases : cases.filter(c => c.type === filterType);
+  list.innerHTML = filtered.map(c => `
+    <div class="case-item ${currentCase && currentCase.id === c.id ? 'active' : ''}" onclick="selectCase(${c.id})">
+      <div class="case-item-title">${c.title}</div>
+      <div class="case-item-sub">${c.ref}</div>
+      <div class="case-item-meta">
+        <span class="badge badge-${c.level}">${c.difficulte}</span>
+        <span class="type-badge">${c.type === 'auto' ? 'Auto' : 'Habitation'}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function selectCase(id) {
+  currentCase = cases.find(c => c.id === id);
+  currentTab = 'dossier';
+  if (!checkStates[id]) checkStates[id] = new Array(currentCase.checklist.length).fill(false);
+  if (!evalStates[id]) evalStates[id] = new Array(currentCase.eval.length).fill(0);
+  renderList();
+  renderHeader();
+  renderMain();
+  document.getElementById('tabs-bar').style.display = 'flex';
+  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', i===0));
+}
+
+function renderHeader() {
+  const c = currentCase;
+  const sc = statusClass[c.statut] || 'status-encours';
+  document.getElementById('case-title').textContent = c.title;
+  document.getElementById('case-subtitle').textContent = `${c.ref} · ${c.type === 'auto' ? 'Sinistre Auto' : 'Sinistre Habitation'}`;
+  const hdr = document.getElementById('main-header');
+  const chip = hdr.querySelector('.status-chip');
+  if (chip) chip.remove();
+  const el = document.createElement('span');
+  el.className = `status-chip ${sc}`;
+  el.textContent = c.statut;
+  hdr.appendChild(el);
+}
+
+function switchTab(tab, el) {
+  currentTab = tab;
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  renderMain();
+}
+
+function renderMain() {
+  if (!currentCase) return;
+  const c = currentCase;
+  const content = document.getElementById('tab-content');
+
+  if (currentTab === 'dossier') {
+    const checks = checkStates[c.id];
+    const done = checks.filter(Boolean).length;
+    const pct = Math.round(done / checks.length * 100);
+    content.innerHTML = `
+      <div class="info-grid">
+        <div class="info-card"><div class="label">Assuré</div><div class="value">${c.assure}</div></div>
+        <div class="info-card"><div class="label">Téléphone</div><div class="value">${c.tel}</div></div>
+        <div class="info-card"><div class="label">Contrat</div><div class="value">${c.contrat}</div></div>
+        <div class="info-card"><div class="label">Date sinistre</div><div class="value">${c.date}</div></div>
+      </div>
+      <div class="section-title">Historique du dossier</div>
+      <div class="timeline">
+        ${c.timeline.map(t=>`<div class="tl-item"><div class="tl-dot tl-dot-${t.dot}"></div><div class="tl-body"><div class="tl-text">${t.text}</div><div class="tl-time">${t.time}</div></div></div>`).join('')}
+      </div>
+      <div class="section-title">Points de contrôle</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-label"><span>${done} / ${checks.length} complétés</span><span>${pct}%</span></div>
+        <div class="progress-bar"><div class="progress-bar-fill" id="prog-fill" style="width:${pct}%"></div></div>
+      </div>
+      <div class="checklist">
+        ${c.checklist.map((item,i)=>`
+          <div class="check-item" onclick="toggleCheck(${c.id},${i})">
+            <div class="check-box ${checks[i]?'checked':''}"></div>
+            <span class="check-label ${checks[i]?'done':''}">${item}</span>
+          </div>
+        `).join('')}
+      </div>
+      <div style="margin-top:16px">
+        <button class="btn btn-reset" onclick="resetChecks(${c.id})">Réinitialiser les points</button>
+      </div>
+    `;
+  } else if (currentTab === 'scenario') {
+    content.innerHTML = `
+      <div class="section-title">Mise en situation</div>
+      <div class="scenario-box level-${c.level}">
+        <p>${c.context}</p>
+        <div class="obj">🎯 Objectif : ${c.objectif}</div>
+      </div>
+      <div class="section-title">Niveau de difficulté</div>
+      <span class="badge badge-${c.level}" style="font-size:13px;padding:5px 14px">${c.difficulte}</span>
+      <div class="section-title" style="margin-top:18px">Points de vigilance pour le formateur</div>
+      <div class="vigilance-box">${c.vigilance}</div>
+    `;
+  } else if (currentTab === 'script') {
+    content.innerHTML = `
+      <div class="section-title">Guide d'appel — dialogue simulé</div>
+      ${c.script.map(s=>`
+        <div class="script-block ${s.who}">
+          <div class="script-who ${s.who}">${s.who==='conseiller'?'Conseiller (CRC)':'Client / Assuré'}</div>
+          <div class="script-text">${s.text}</div>
+          ${s.note?`<div class="script-note">💡 ${s.note}</div>`:''}
+        </div>
+      `).join('')}
+    `;
+  } else if (currentTab === 'evaluation') {
+    const stars = evalStates[c.id];
+    const total = stars.reduce((a,b)=>a+b,0);
+    const max = stars.length * 5;
+    content.innerHTML = `
+      <div class="section-title">Grille d'évaluation du conseiller</div>
+      ${c.eval.map((item,i)=>`
+        <div class="eval-item">
+          <div class="eval-label">${item}</div>
+          <div class="stars">
+            ${[1,2,3,4,5].map(s=>`<span class="star ${stars[i]>=s?'lit':''}" onclick="setStar(${c.id},${i},${s})">★</span>`).join('')}
+          </div>
+        </div>
+      `).join('')}
+      <div class="score-card">
+        <div><div class="sc-label">Score global</div><div class="sc-val">${total===0?'—':total+' / '+max+' pts'}</div></div>
+        <button class="btn btn-reset" onclick="resetEval(${c.id})">Réinitialiser</button>
+      </div>
+    `;
+  }
+}
+
+function toggleCheck(caseId, index) {
+  checkStates[caseId][index] = !checkStates[caseId][index];
+  renderMain();
+}
+
+function resetChecks(caseId) {
+  checkStates[caseId] = new Array(cases.find(c=>c.id===caseId).checklist.length).fill(false);
+  renderMain();
+}
+
+function setStar(caseId, index, value) {
+  evalStates[caseId][index] = value;
+  renderMain();
+}
+
+function resetEval(caseId) {
+  evalStates[caseId] = new Array(cases.find(c=>c.id===caseId).eval.length).fill(0);
+  renderMain();
+}
+
+renderList();
+</script>
+</body>
+</html>
